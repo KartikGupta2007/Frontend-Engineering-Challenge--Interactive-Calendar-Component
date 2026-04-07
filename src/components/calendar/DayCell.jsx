@@ -74,7 +74,6 @@ export const DayCell = memo(({ day, isOtherMonth, isStart, isEnd, isBetween }) =
       data-date={day.toISOString()}
       className={clsx(
         "day-cell hover:-translate-y-px hover:shadow-sm z-0 relative select-none",
-        isOtherMonth && "other-month",
         today && "today",
         isStart && "day-selected-start z-20!",
         isEnd && "day-selected-end z-20!",
@@ -88,32 +87,34 @@ export const DayCell = memo(({ day, isOtherMonth, isStart, isEnd, isBetween }) =
       onMouseUp={handleMouseUp}
       onDragStart={(e) => e.preventDefault()}
     >
-      {/* Date number — absolutely positioned top-right, consistent across all states */}
+      {/* Date number — circle pill for normal dates, wider "1 Sep" pill for the 1st of each month */}
       <div className={clsx(
         "absolute top-2 right-2 sm:top-3 sm:right-3 z-20",
-        "w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full",
+        "h-7 sm:h-8 flex items-center justify-center rounded-full",
+        // Fixed circle for normal dates, auto-width pill for "1 Sep" style
+        day.getDate() === 1 ? "px-2" : "w-7 sm:w-8",
         today && !isStart && !isEnd && "bg-pink-100",
         today && (isStart || isEnd) && "ring-3 ring-white/50 ring-offset-2 ring-offset-pink-500"
       )}>
         <span
           className={clsx(
-            "text-sm sm:text-base font-bold leading-none",
+            "text-sm sm:text-base font-bold leading-none whitespace-nowrap",
             today && !isStart && !isEnd && "font-extrabold!"
           )}
           style={{
             color: (isStart || isEnd) ? '#ffffff'
-                 : isOtherMonth       ? '#9ca3af'
                  : today              ? '#9d174d'
                  :                      '#111827'
           }}
         >
-          {dayNumber}
+          {day.getDate() === 1 ? format(day, 'd MMM') : dayNumber}
         </span>
       </div>
 
       {(isStart || isEnd) && (
         <div className="absolute inset-1 bg-white/20 rounded-md -z-10 pointer-events-none shadow-sm"></div>
       )}
+
     </div>
   );
 });

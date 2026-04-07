@@ -36,7 +36,7 @@ export function NotesSection() {
 
 
   return (
-    <div className="p-4 sm:p-6 md:pl-8 flex flex-col h-full min-h-[300px]">
+    <div className="p-4 sm:p-6 md:pl-8 flex flex-col h-full overflow-hidden min-h-0">
       <div className="flex justify-between items-end mb-1">
         <h3 className="text-xl sm:text-2xl font-handwriting font-bold text-gray-800 tracking-tight">{title}</h3>
       </div>
@@ -48,7 +48,7 @@ export function NotesSection() {
         const dates = eachDayOfInterval(normalizeDateRange(startDate, endDate));
         const keys = dates.map(d => formatDateKey(d));
         return (
-        <div className="calendar-notepad mt-1 flex flex-col pt-0 pb-4 overflow-y-auto w-full">
+        <div className="calendar-notepad mt-1 flex flex-col pt-0 pb-4 overflow-y-auto flex-1 w-full min-h-0">
           {/* Master Bulk Insert Row */}
           <div className="flex w-full items-center bg-pink-50/40 rounded-t-sm shrink-0" style={{ height: '30px', minHeight: '30px', maxHeight: '30px' }}>
             <span className="w-14 shrink-0 text-[10px] font-bold text-pink-500 uppercase tracking-widest select-none leading-[30px] pl-1 whitespace-nowrap overflow-hidden">

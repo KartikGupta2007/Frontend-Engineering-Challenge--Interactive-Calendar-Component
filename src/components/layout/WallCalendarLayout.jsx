@@ -14,7 +14,7 @@ export function WallCalendarLayout() {
   return (
     <div className="min-h-screen bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-[#F3F4F6] flex items-center justify-center p-4 md:p-12 overflow-hidden font-sans perspective-[1500px]">
 
-      <div className="relative w-full max-w-4xl z-10 drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)] flex flex-col perspective-distant">
+      <div className="relative w-full max-w-5xl z-10 drop-shadow-[0_25px_35px_rgba(0,0,0,0.25)] flex flex-col perspective-distant">
 
         {/* Top Paper: Hero Section (with 3D Flip Anim) */}
         <div className="relative w-full h-56 sm:h-80 md:h-[400px]">
@@ -46,20 +46,29 @@ export function WallCalendarLayout() {
           ))}
         </div>
 
-        {/* Bottom Paper: Calendar & Notes */}
-        <div className="w-full bg-[#fdfbf7] rounded-b-2xl shadow-[inset_0_10px_20px_rgba(0,0,0,0.05)] flex flex-col md:flex-row relative z-10 pt-4 md:pt-6 pb-2 px-2 md:px-4">
+        {/* Bottom Paper: Calendar & Notes
+            ─ position:relative so the absolute notes overlay can anchor to it
+            ─ Calendar grid drives the natural height
+            ─ Notes panel overlays the right side absolutely (zero layout influence) */}
+        <div className="w-full bg-[#fdfbf7] rounded-b-2xl shadow-[inset_0_10px_20px_rgba(0,0,0,0.05)] relative z-10 pt-4 md:pt-6 pb-2 px-2 md:px-4">
 
-          {/* Calendar Grid & Nav */}
-          <div className="flex-1 md:border-r border-gray-200/60 relative pt-2">
+          {/* Calendar Grid — takes full width on mobile, reserves right 35% on desktop */}
+          <div className="md:pr-[35%] md:border-r border-gray-200/60 pt-2">
             <CalendarWidget />
           </div>
 
-          {/* Real physical notes section */}
-          <div className="w-full md:w-[35%] min-w-[280px]">
+          {/* Notes column (desktop) — absolutely pinned to right side, height = calendar's height */}
+          <div className="hidden md:flex flex-col absolute top-0 right-0 bottom-0 w-[35%] overflow-hidden pt-4 md:pt-6 pb-2">
+            <NotesSection />
+          </div>
+
+          {/* Notes section (mobile) — normal flow below the calendar grid */}
+          <div className="md:hidden border-t border-gray-200/60 mt-2">
             <NotesSection />
           </div>
 
         </div>
+
 
       </div>
     </div>
