@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-handwriting: 'Caveat', 'Comic Sans MS', cursive;
+  --color-base: #f9fafb;
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
+  --color-primary: #ec4899;
+  --color-primary-hover: #db2777;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased font-sans;
+  }
+}
+
+/* Custom visual states for the calendar cells */
+.day-cell {
+  @apply relative flex flex-col justify-between p-1.5 sm:p-3 min-h-[60px] sm:min-h-[100px] transition-all duration-300 border border-transparent cursor-pointer select-none rounded-lg m-0.5 overflow-hidden;
+}
+
+.day-cell:hover:not(.day-selected-start):not(.day-selected-end):not(.other-month) {
+  @apply bg-pink-50/80 ring-1 ring-pink-100 scale-105 z-30 shadow-sm;
+}
+
+.day-selected-start,
+.day-selected-end {
+  @apply bg-pink-500 text-white shadow-[0_4px_14px_0_rgba(236,72,153,0.39)] ring-2 ring-pink-400 ring-offset-1 z-30;
+}
+
+.day-in-between {
+  @apply bg-pink-50/90 rounded-none m-0 border-y border-transparent scale-100 z-10 text-pink-900;
+}
+
+.day-in-between.first-of-week {
+  @apply rounded-l-lg ml-0.5;
+}
+.day-in-between.last-of-week {
+  @apply rounded-r-lg mr-0.5;
+}
+
+.day-cell.other-month {
+  @apply text-gray-400 opacity-60 bg-transparent cursor-default;
+}
+
+.calendar-notepad {
+  background-image: 
+    linear-gradient(transparent, transparent 29px, #e5e7eb 29px, #e5e7eb 30px, transparent 30px);
+  background-size: 100% 30px;
+  background-attachment: local;
+  line-height: 30px;
+  @apply resize-none outline-none bg-transparent w-full mt-1 font-handwriting text-xl text-sky-900 min-h-[300px];
+}
