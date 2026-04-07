@@ -1,10 +1,10 @@
 import React, { memo, useRef, useEffect, useCallback } from 'react';
 import clsx from 'clsx';
-import { useCalendarContext } from '../../context/CalendarContext';
+import { useCalendarDispatch } from '../../context/CalendarContext';
 import { isToday, format } from 'date-fns';
 
 export const DayCell = memo(({ day, isOtherMonth, isStart, isEnd, isBetween }) => {
-  const { dispatch } = useCalendarContext();
+  const dispatch = useCalendarDispatch();
   const cellRef = useRef(null);
 
   const today = isToday(day);

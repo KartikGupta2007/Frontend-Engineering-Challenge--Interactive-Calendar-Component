@@ -1,9 +1,10 @@
-import { useCalendarContext } from '../../context/CalendarContext';
+import { useCalendarState, useCalendarDispatch } from '../../context/CalendarContext';
 import { format } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export function CalendarHeader() {
-  const { state, dispatch } = useCalendarContext();
+  const state = useCalendarState();
+  const dispatch = useCalendarDispatch();
 
   return (
     <div className="flex items-center justify-between px-6 py-5 bg-white border-b border-gray-100">

@@ -1,7 +1,8 @@
 import React, { createContext, useReducer, useEffect, useContext } from 'react';
 import { calendarReducer, initialState } from './calendarReducer';
 
-const CalendarContext = createContext(null);
+const CalendarStateContext = createContext(null);
+const CalendarDispatchContext = createContext(null);
 
 export function CalendarProvider({ children }) {
   const [state, dispatch] = useReducer(calendarReducer, initialState, (initial) => {
@@ -21,17 +22,36 @@ export function CalendarProvider({ children }) {
     localStorage.setItem('calendarNotes', JSON.stringify(state.notes));
   }, [state.notes]);
 
+  // Memoize the context value to prevent unnecessary re-renders of consumers
+  const value = React.useMemo(() => ({ state, dispatch }), [state, dispatch]);
+
   return (
-    <CalendarContext.Provider value={{ state, dispatch }}>
-      {children}
-    </CalendarContext.Provider>
+    <CalendarStateContext.Provider value={state}>
+      <CalendarDispatchContext.Provider value={dispatch}>
+        {children}
+      </CalendarDispatchContext.Provider>
+    </CalendarStateContext.Provider>
   );
 }
 
-export function useCalendarContext() {
-  const context = useContext(CalendarContext);
-  if (!context) {
-    throw new Error('useCalendarContext must be used within a CalendarProvider');
+export function useCalendarState() {
+  const context = useContext(CalendarStateContext);
+  if (context === undefined) {
+    throw new Error('useCalendarState must be used within a CalendarProvider');
   }
   return context;
+}
+
+export function useCalendarDispatch() {
+  const context = useContext(CalendarDispatchContext);
+  if (context === undefined) {
+    throw new Error('useCalendarDispatch must be used within a CalendarProvider');
+  }
+  return context;
+}
+
+export function useCalendarContext() {
+  const state = useCalendarState();
+  const dispatch = useCalendarDispatch();
+  return { state, dispatch };
 }
