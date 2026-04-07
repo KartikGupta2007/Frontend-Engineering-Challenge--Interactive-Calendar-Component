@@ -32,16 +32,55 @@ export function WallCalendarLayout() {
           </AnimatePresence>
         </div>
 
-        {/* The Spiral Binder - Sits between the two halves */}
-        <div className="absolute top-56 sm:top-80 md:top-100 -mt-6 w-full h-12 flex justify-evenly items-center z-50 pointer-events-none px-4 md:px-12">
-          {[...Array(14)].map((_, i) => (
-            <div key={i} className="relative w-6 h-12">
-              {/* Top Hole */}
-              <div className="absolute top-1 left-1 w-4 h-3 bg-gray-900 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)] opacity-90"></div>
-              {/* Metallic Wire Ring */}
-              <div className="absolute top-0 left-2.5 w-1.5 h-12 bg-linear-to-r from-gray-400 via-gray-200 to-gray-500 rounded-full shadow-[2px_2px_4px_rgba(0,0,0,0.3)] border border-black/20"></div>
-              {/* Bottom Hole */}
-              <div className="absolute bottom-1 left-1 w-4 h-3 bg-gray-900 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)] opacity-90"></div>
+        {/* ── Spiral Binding ────────────────────────────────────────────────────
+            Centered exactly on the seam between hero and calendar body.
+            Each ring = outer metallic oval + inner hole cutout.
+            Inline styles used to guarantee gradient/shadow rendering.           */}
+        <div
+          className="spiral-bar absolute w-full z-50 pointer-events-none"
+          style={{
+            top:            'calc(224px - 16px)',
+            display:        'flex',
+            justifyContent: 'space-evenly',
+            alignItems:     'center',
+            padding:        '0 20px',
+          }}
+        >
+          <style>{`
+            @media (min-width: 640px) { .spiral-bar { top: calc(320px - 16px) !important; } }
+            @media (min-width: 768px) { .spiral-bar { top: calc(400px - 16px) !important; } }
+          `}</style>
+
+          {[...Array(18)].map((_, i) => (
+            <div
+              key={i}
+              style={{
+                position:     'relative',
+                width:        '22px',
+                height:       '32px',
+                flexShrink:   0,
+              }}
+            >
+              {/* Outer metallic ring — chrome gradient gives 3-D arc impression */}
+              <div style={{
+                position:     'absolute',
+                inset:        0,
+                borderRadius: '11px',
+                background:   'linear-gradient(160deg, #f5f5f5 0%, #d4d4d4 20%, #888 45%, #b0b0b0 65%, #e8e8e8 85%, #c8c8c8 100%)',
+                boxShadow:    '0 4px 10px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.7)',
+              }} />
+
+              {/* Inner hole — dark with inset shadow for depth */}
+              <div style={{
+                position:     'absolute',
+                top:          '5px',
+                left:         '5px',
+                right:        '5px',
+                bottom:       '5px',
+                borderRadius: '6px',
+                background:   'linear-gradient(135deg, #1a1a1a 0%, #333 40%, #111 100%)',
+                boxShadow:    'inset 0 2px 5px rgba(0,0,0,0.9), inset 0 -1px 2px rgba(255,255,255,0.05)',
+              }} />
             </div>
           ))}
         </div>
