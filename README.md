@@ -1,71 +1,114 @@
-# 📅 Interactive Wall Calendar - Frontend Challenge
+# 📅 Interactive Wall Calendar - Advanced Frontend Challenge
 
-A premium, highly interactive calendar component built with **React**, **Vite**, and **Framer Motion**. This project features a unique 3D "Spiral Binding" design, dynamic month-based themes, and a Vanta.js-powered animated background for a truly immersive user experience.
+![Interactive Wall Calendar UI](./Demo.png)
 
-![Calendar UI Preview](https://github.com/user-attachments/assets/...)
+> **Live Demo**: [interactive-calendar-nu.vercel.app](https://frontend-engineering-challenge-inte.vercel.app/)
 
-## ✨ Key Features
+A premium, highly interactive calendar component built with a "Production-First" mindset. This project pushes the boundaries of standard scheduling UIs by combining a 3D "Spiral Binding" physical aesthetic with cutting-edge React performance patterns.
 
-- **3D Spiral Binding Layout**: A unique visual design that mimics a physical wall calendar with depth and realistic shadows.
-- **Dynamic Seasonal Themes**: Backgrounds and UI accents change automatically based on the month (Winter Snow, Spring Blooms, Summer Sunsets, etc.).
-- **Smart Date Selection**: Drag-to-select multiple days with automatic range normalization and responsive hover states.
-- **Persistent Notes**: Integrated notepad for each month with local storage persistence to keep your notes saved between sessions.
-- **Performance Optimized**: 
-  - Split Context architecture (State/Dispatch) to minimize re-renders.
-  - Memoized grid cells for smooth interaction even with 42+ active cells.
-  - Optimized Vanta.js background with proper layer management.
-- **Production-Ready**: 
-  - Global Error Boundary for runtime resilience.
-  - Vercel-optimized configuration.
-  - Mobile-first responsive design.
+---
 
-## 🚀 Tech Stack
+## 🎖️ Special Recognition & Origin Story
 
-- **Framework**: React 19 (Vite)
-- **Styling**: Tailwind CSS 4
-- **Animations**: Framer Motion
-- **Visuals**: Vanta.js (Net) + Three.js
-- **Date Handling**: date-fns
-- **Icons**: Lucide React
+This project is a successor to my **Google Calendar Replicate**, which was born out of a high-pressure hackathon during my **first semester of college**. 
 
-## 🛠️ Architecture
+During that hackathon (which focused on creating RL environments), I attempted to replicate the full Google Calendar experience. 
+- **The Challenge**: Completely "vibe-coded" using **Claude-Max** (provided by the organizers).
+- **The Achievement**: Secured the **Runner-Up position** in the Google Calendar category.
+- **Legacy Repo**: [Google-Calender](https://github.com/KartikGupta2007/Google-Calender)
+- **Legacy Demo**: [google-calender-nu.vercel.app](https://google-calender-nu.vercel.app/)
 
-- **Context API**: Uses a split-context pattern where state and dispatch are provided separately. This ensures that components only needing `dispatch` (like `DayCell`) don't re-render when the global `selection` state changes.
-- **Reducer Pattern**: Centralized state management for navigation, selection range, and notes.
-- **Custom Hooks**: 
-  - `useCalendarGrid`: Generates the 6-week display grid for any given month.
-  - `useCalendarState`: Access to current view, selection, and notes.
-  - `useCalendarDispatch`: Access to state update actions.
+This current project takes the lessons learned from that high-speed iteration and applies **Senior-level Engineering patterns** to create a cleaner, more performant, and more scalable architecture.
 
-## 📦 Getting Started
+---
 
-### Prerequisites
-- Node.js 18+
-- npm / pnpm / yarn
+## ✨ Core Features
 
-### Installation
-1. Clone the repository:
+### 🎨 Immersive Visual Experience
+- **3D Spiral Binding Layout**: A realistic "physical paper" look that mimics a traditional wall calendar, featuring depth, perspective transforms, and soft drop shadows.
+- **Dynamic Seasonal Themes**: The calendar UI (backgrounds, badges, and accents) automatically adapts to the currently viewed month (e.g., Summer Sunset for July, Winter Snow for December).
+- **Vanta.js Animated Background**: A fluid, high-performance "Net" animation that brings the interface to life without distracting from the core utility.
+
+### 🖱️ Advanced Interactivity
+- **Intelligent Range Selection**: Seamless drag-to-select functionality for multi-day ranges, including normalization logic that handles backward selection.
+- **Persistent Notes Grid**: A per-month scratchpad (Notepad style) that persists state using `localStorage`, allowing users to keep monthly goals and reminders alive.
+- **Haptic-Feedback Style Hover**: Micro-animations and scale transforms on day cells for a premium, tactile feel.
+
+### ⚡ Technical Excellence (Production Grade)
+- **Split-Context Performance Pattern**: Uses dual contexts (`StateContext` and `DispatchContext`) to isolate state updates. This ensures that a re-render in the selection state doesn't trigger unnecessary updates across 40+ grid cells.
+- **Component Memoization**: Heavy-duty grid rendering optimized via `React.memo` to maintain 60FPS even during complex mouse/touch interactions.
+- **Global Error Handling**: Integrated `ErrorBoundary` to catch edge-case rendering issues without crashing the entire application.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core**: React 19 + Vite
+- **Styling**: Tailwind CSS 4 (Next-gen engine)
+- **Animation**: Framer Motion 12
+- **Visuals**: Vanta.js + Three.js
+- **Date Logic**: date-fns 4
+- **Icons**: Lucide React 
+
+---
+
+## 🏗️ Architecture & Project Structure
+
+The codebase follows a modular architecture designed for maintainability and separation of concerns:
+
+```text
+src/
+├── components/
+│   ├── calendar/      # DayGrid, DayCell, Header logic
+│   ├── common/        # Reusable ErrorBoundaries, Dividers
+│   ├── hero/          # Dynamic seasonal visuals
+│   ├── layout/        # Vanta wrapper, 3D Wall container
+│   └── notes/         # Persistent Notepad implementation
+├── context/           # Split State/Dispatch providers
+├── hooks/             # useCalendarGrid logic
+└── utils/             # calculateDayFlags, date normalization
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+1. **Clone the repository**:
    ```bash
-   git clone [repository-url]
+   git clone https://github.com/KartikGupta2007/Frontend-Engineering-Challenge--Interactive-Calendar-Component.git
    ```
-2. Install dependencies:
+
+2. **Install dependencies**:
    ```bash
    npm install
    ```
-3. Run the development server:
+
+3. **Launch local dev server**:
    ```bash
    npm run dev
    ```
 
-## 🌐 Deployment
+4. **Production Build**:
+   ```bash
+   npm run build
+   ```
 
-This project is optimized for **Vercel**. 
-- Single Page Application (SPA) routing is handled via `vercel.json`.
-- Asset caching is pre-configured for better performance.
+---
+
+## 🚀 Deployment
+
+Optimized for **Vercel** via `vercel.json` configuration, ensuring smooth SPA routing and high-performance asset delivery.
+
+```json
+{
+  "framework": "vite",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+```
 
 ---
 
 ### Author
 **Kartik Gupta**
-- [GitHub](https://github.com/KartikGupta2007)
-- [LinkedIn](https://www.linkedin.com/in/...)
+- GitHub: [@KartikGupta2007](https://github.com/KartikGupta2007)
+- Projects: [Interactive Calendar](https://github.com/KartikGupta2007/Frontend-Engineering-Challenge--Interactive-Calendar-Component) | [Google Calendar Clone](https://github.com/KartikGupta2007/Google-Calender)
