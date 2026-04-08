@@ -1,12 +1,20 @@
 # Video Demonstration Script (2-3 Minutes)
 
-## 0:00-0:20 - Intro
+## 0:00-0:15 - Intro
 **On screen:** App loaded in desktop view.
 
 **Say:**
-Hi, this is my interactive calendar component. In this short demo, I will show three things: day range selection, the notes feature, and how the component adapts to desktop and mobile screen sizes.
+Hi, this is my interactive calendar component. In this short demo, I will show day range selection, the notes feature, and responsive behavior across desktop and mobile.
 
-## 0:20-1:10 - Day Range Selection
+## 0:15-0:35 - Project Background (Scaler AI Labs)
+**On screen:** Keep calendar visible, optionally point to title/hero area.
+
+**Say:**
+This project is a successor to my previous Google Calendar clone, which I built during the Scaler AI Labs hackathon in my first semester of college.
+
+That build was created under intense time constraints and earned Runner-Up in the Google Calendar category. This version applies those learnings with cleaner architecture and stronger UI polish.
+
+## 0:35-1:20 - Day Range Selection
 **On screen:**
 - Click one day as the start date.
 - Click a later day as the end date.
@@ -18,7 +26,7 @@ First is day range selection. I select a start date here, then an end date here.
 
 If I choose a different date, the range updates instantly. This interaction makes planning flexible and fast.
 
-## 1:10-1:55 - Notes Feature
+## 1:20-2:00 - Notes Feature
 **On screen:**
 - Select a date.
 - Open notes area.
@@ -30,7 +38,7 @@ Next is the notes feature. I can select any date and add a note for reminders, e
 
 When I switch between dates and come back, the note remains attached to that date. This makes it easy to keep daily context directly inside the calendar.
 
-## 1:55-2:25 - Responsive Behavior (Desktop to Mobile)
+## 2:00-2:30 - Responsive Behavior (Desktop to Mobile)
 **On screen:**
 - Show desktop layout briefly.
 - Resize browser window or use responsive mode to mobile width.
@@ -41,7 +49,7 @@ Now I will show responsiveness. On desktop, the component uses a wider layout wi
 
 The key interactions stay consistent across both sizes, so usability remains strong on any device.
 
-## 2:25-2:40 - Closing
+## 2:30-2:45 - Closing
 **On screen:** Selected range and a noted day visible.
 
 **Say:**
