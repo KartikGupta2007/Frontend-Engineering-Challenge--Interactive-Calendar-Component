@@ -56,6 +56,7 @@ export function WallCalendarLayout() {
             {[...Array(18)].map((_, i) => (
               <div
                 key={i}
+                className={i >= 11 ? "hidden sm:block" : ""}
                 style={{
                   position:     'relative',
                   width:        '22px',

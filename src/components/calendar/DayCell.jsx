@@ -89,16 +89,16 @@ export const DayCell = memo(({ day, isOtherMonth, isStart, isEnd, isBetween }) =
     >
       {/* Date number — circle pill for normal dates, wider "1 Sep" pill for the 1st of each month */}
       <div className={clsx(
-        "absolute top-2 right-2 sm:top-3 sm:right-3 z-20",
+        "absolute top-1 left-1/2 -translate-x-1/2 sm:top-2 sm:left-auto sm:translate-x-0 sm:right-2 z-20",
         "h-7 sm:h-8 flex items-center justify-center rounded-full",
         // Fixed circle for normal dates, auto-width pill for "1 Sep" style
-        day.getDate() === 1 ? "px-2" : "w-7 sm:w-8",
+        day.getDate() === 1 ? "px-1 sm:px-2" : "w-7 sm:w-8",
         today && !isStart && !isEnd && "bg-pink-100",
         today && (isStart || isEnd) && "ring-3 ring-white/50 ring-offset-2 ring-offset-pink-500"
       )}>
         <span
           className={clsx(
-            "text-sm sm:text-base font-bold leading-none whitespace-nowrap",
+            "text-[11px] sm:text-base font-bold leading-none whitespace-nowrap",
             today && !isStart && !isEnd && "font-extrabold!"
           )}
           style={{
@@ -107,7 +107,7 @@ export const DayCell = memo(({ day, isOtherMonth, isStart, isEnd, isBetween }) =
                  :                      '#111827'
           }}
         >
-          {day.getDate() === 1 ? format(day, 'd MMM') : dayNumber}
+          {day.getDate() === 1 ? format(day, 'MMM d') : dayNumber}
         </span>
       </div>
 
